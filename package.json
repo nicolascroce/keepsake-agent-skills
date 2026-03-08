@@ -1,0 +1,20 @@
+{
+  "name": "keepsake-agent-skills",
+  "version": "1.0.0",
+  "description": "AI Agent Skills for Keepsake Personal CRM",
+  "license": "MIT",
+  "author": "Keepsake <nicolas@croce.fr>",
+  "homepage": "https://keepsake.place",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolascroce/keepsake-agent-skills.git"
+  },
+  "keywords": [
+    "keepsake",
+    "crm",
+    "ai-agent",
+    "claude",
+    "mcp",
+    "skills"
+  ]
+}
