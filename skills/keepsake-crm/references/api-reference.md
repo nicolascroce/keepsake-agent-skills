@@ -113,14 +113,16 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/tags` | List all tags |
-| GET | `/tags/:id` | Get a single tag |
-| GET | `/tags/:id/items` | Get all items linked to a tag |
+| GET | `/tags` | List tags (`?q=` name search, `?limit=&offset=` pagination; ordering arrays omitted — use `?include_orders=true` or GET `/tags/:id`) |
+| GET | `/tags/:id` | Get a single tag (includes `tasks_order`, where `"h:<header_id>"` entries mark section separators) |
+| GET | `/tags/:id/items` | Get items linked to a tag (`?types=tasks,notes`, `?status=pending\|completed` for tasks, `?summary=true` for lightweight items; response includes task `sections` — `header_id: null` = tasks outside any section) |
 | POST | `/tags` | Create a tag |
 | PATCH | `/tags/:id` | Update a tag |
 | DELETE | `/tags/:id` | Delete a tag |
 
 **Create body**: `{ name, emoji? }`
+
+**Tip**: on large tags, prefer `GET /tags/:id/items?types=tasks&status=pending&summary=true` — the default (no params) returns every linked item in full and can be a very large response.
 
 ## Task Headers (Sections)
 
