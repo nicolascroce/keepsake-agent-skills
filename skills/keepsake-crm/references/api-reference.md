@@ -101,6 +101,26 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 **Create body**: `{ content, pinned?, contact_ids?, tag_ids? }`
 
+### Note comments (marginalia)
+
+Working material kept alongside a note without entering its text — an idea, a
+reference, an excerpt. Never published, temporary by design (anything worth
+keeping becomes a note or a linked task). Comments created via the API are
+marked `author_type: "agent"` and shown in blue ink in the app.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/notes/:id/comments` | List a note's comments |
+| POST | `/notes/:id/comments` | Attach a comment. Body: `{ body, quote? }` |
+| PATCH | `/notes/:id/comments/:commentId` | Edit content. Body: `{ body }` |
+| DELETE | `/notes/:id/comments/:commentId` | Delete (the normal way to retire one) |
+
+To anchor a comment to a passage, pass `quote` with that passage copied
+**verbatim** from the note content — the server locates it and stores the
+surrounding context so the anchor survives later edits. If the quote is not
+found verbatim, the call is refused (`QUOTE_NOT_FOUND`) rather than attached to
+the wrong place. Omit `quote` for a note-wide comment.
+
 ## Days
 
 | Method | Endpoint | Description |

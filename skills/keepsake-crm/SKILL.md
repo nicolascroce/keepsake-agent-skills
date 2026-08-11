@@ -104,6 +104,8 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 **Tag syntax**: Use `#tag name#` or `[[page name]]` in content to auto-create and link tags.
 
+**Note comments = marginalia**: Use `list_note_comments` / `create_note_comment` to work IN THE MARGIN of a note — remarks, references, excerpts that must never enter the text (notes get published; comments never do). To anchor one to a passage, pass `quote` with the passage copied **verbatim** from the note content; omit it for a note-wide comment. Your comments render in blue ink, the user's in red — keep them few and substantive: a note peppered with comments is a note the user abandons. Comments are temporary by design: no resolved state, `delete_note_comment` is the normal exit, and anything worth keeping should become a note or a linked task instead.
+
 **Global search = idea collisions**: Use `search` across all entity types. This is your first reflex for open-ended questions. It resurfaces unexpected connections between notes, contacts, entries — the central mechanism for recombining ideas.
 
 # Crossing Dimensions

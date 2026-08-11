@@ -147,7 +147,16 @@ Tag     <──many-to-many──> Task
 Tag     <──many-to-many──> Note
 Tag     <──many-to-many──> Contact
 Task    ──many-to-one───> TaskHeader (optional section)
+Comment ──many-to-one───> Note (marginalia, anchored to a passage or note-wide)
 ```
+
+A **note comment** (marginalia) is working material kept alongside a note
+without entering its text: `body` (markdown), an optional anchor (`quote` — the
+exact passage, plus server-derived context), and `author_type` (`user` or
+`agent`; API-created comments are always `agent` and render in blue ink).
+Comments are temporary by design — there is no resolved state, deletion is the
+normal exit; anything worth keeping becomes a note or a linked task. They never
+appear in published notes.
 
 Every note, entry, and task can be linked to 0-N contacts and 0-N tags. Use dedicated link/unlink endpoints for granular control, or pass `contact_ids`/`tag_ids` arrays at creation time.
 
