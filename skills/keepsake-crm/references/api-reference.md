@@ -125,9 +125,12 @@ the wrong place. Omit `quote` for a note-wide comment.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/days` | List all day entries |
+| GET | `/days` | List days with their intention or question of the day |
 | GET | `/days/:date` | Get a day (date = YYYY-MM-DD) |
-| PATCH | `/days/:date` | Update a day (body: `{ content }`) |
+| POST | `/days` | Create or update a day (upsert, body: `{ date, note }`) |
+| PATCH | `/days/:date` | Update a day (body: `{ note }`) |
+
+`note` is the **intention or question of the day**: one short line (mantra, intention, single priority, or a question to keep in mind). Not a journal — never write a summary of the day here.
 
 ## Tags
 

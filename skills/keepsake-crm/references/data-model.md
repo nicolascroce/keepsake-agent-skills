@@ -100,13 +100,13 @@ A durable text document — like a digital index card. Intentional capture, shor
 
 ### Day
 
-A daily journal entry / summary.
+A calendar day carrying the user's **intention or question of the day** — one short line shown at the top of the Today view (a mantra, an intention, a single priority, or a question to keep in mind). Not a journal: what happened during the day lives in entries.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | id | uuid | auto | Unique identifier |
 | date | string | yes | Date (YYYY-MM-DD) |
-| content | text | no | Journal content (Markdown) |
+| note | text | no | Intention or question of the day (one short line) |
 | createdAt | timestamp | auto | Creation date |
 | updatedAt | timestamp | auto | Last update |
 

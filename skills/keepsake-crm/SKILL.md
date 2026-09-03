@@ -44,7 +44,7 @@ Keepsake organizes information across three dimensions:
 
 | Dimension | Entities | Logic |
 |-----------|----------|-------|
-| **Time** | Entries (journal), Tasks, Day summaries | Chronological — what happened, what needs to happen |
+| **Time** | Entries (journal), Tasks, Days (intention of the day) | Chronological — what happened, what needs to happen |
 | **People** | Contacts, Companies | Relational — with whom, for whom |
 | **Themes** | Tags/Pages, Notes (index cards) | Knowledge — about what, in which project |
 
@@ -78,7 +78,7 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 **Log an interaction**: `search_contacts` to find the person, then `create_entry` with the right type (call, email, meeting, event, gift, letter, message, other). Link contacts and tags. Optionally create a follow-up task.
 
-**Daily ritual**: Use `get_tasks_today` to see the day's tasks. Use `update_day` to write a journal summary at the end of the day.
+**Daily ritual**: Use `get_tasks_today` to see the day's tasks. Use `update_day` only to set the *intention or question of the day* — one short line (a mantra, an intention, a single priority, or a question to keep in mind), never a summary of the day. What happened during the day belongs in entries (`create_entry`).
 
 **Tasks and reminders**: `create_task` with a due date and optional recurrence (daily, weekdays, weekly, biweekly, monthly, quarterly, yearly). `snooze_task` to postpone. `complete_task` auto-creates the next occurrence for recurring tasks.
 
