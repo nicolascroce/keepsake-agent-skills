@@ -4,6 +4,15 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.1] - 2026-09-03
+
+### Changed
+- **Days are the intention or question of the day, not a journal.** The daily
+  ritual no longer tells agents to write an end-of-day summary via `update_day`
+  (it overwrote the user's one-line intention). What happened during the day
+  belongs in entries. API reference fixed: `/days` body is `{ note }`, with the
+  `POST /days` upsert documented; data model updated (keepsake-mcp 1.9.1).
+
 ## [1.2.0] - 2026-08-11
 
 ### Added
