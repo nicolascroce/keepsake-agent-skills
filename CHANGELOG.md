@@ -4,6 +4,17 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] - 2026-09-06
+
+### Added
+- **Notes on a day.** A note can be attached to one or more calendar days:
+  `dates` on `create_note` / `update_note`, `link_note_date` / `unlink_note_date`,
+  `list_notes` filtered by `date` / `date_from` / `date_to`, and `get_day` now
+  returns the day's linked notes (`notes`) next to its intention (`note`).
+  Workflow added to SKILL.md ("note for tomorrow" is a dated note, not a task,
+  and not the day's intention). API reference and data model updated
+  (keepsake-mcp 1.10.0).
+
 ## [1.2.1] - 2026-09-03
 
 ### Changed

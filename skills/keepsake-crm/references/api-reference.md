@@ -85,7 +85,7 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/notes` | List notes. Query: `?pinned=true&archived=false` |
+| GET | `/notes` | List notes. Query: `?pinned=true&archived=false`, `?date=YYYY-MM-DD` or `?date_from=…&date_to=…` (notes linked to a day / range). Each note carries `dates` |
 | GET | `/notes/:id` | Get a single note |
 | POST | `/notes` | Create a note |
 | PATCH | `/notes/:id` | Update a note |
@@ -98,8 +98,12 @@ Authorization: Bearer ksk_YOUR_API_KEY
 | DELETE | `/notes/:id/contacts/:contactId` | Unlink a contact |
 | POST | `/notes/:id/tags/:tagId` | Link a tag |
 | DELETE | `/notes/:id/tags/:tagId` | Unlink a tag |
+| POST | `/notes/:id/dates/:date` | Attach the note to a day (YYYY-MM-DD, idempotent) |
+| DELETE | `/notes/:id/dates/:date` | Detach the note from a day (the note survives) |
 
-**Create body**: `{ content, pinned?, contact_ids?, tag_ids? }`
+**Create body**: `{ content, pinned?, contact_ids?, tag_ids?, dates? }` — `dates` is an array of `YYYY-MM-DD`.
+
+**Update body**: `{ content?, contact_ids?, tag_ids?, dates? }` — `dates` **replaces** the full set of days (the way to move a note to another day; `[]` unlinks from every day).
 
 ### Note comments (marginalia)
 
@@ -126,11 +130,11 @@ the wrong place. Omit `quote` for a note-wide comment.
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/days` | List days with their intention or question of the day |
-| GET | `/days/:date` | Get a day (date = YYYY-MM-DD) |
+| GET | `/days/:date` | Get a day (date = YYYY-MM-DD). Always 200: `note` (intention, may be null), `exists`, and `notes[]` — the notes linked to that day |
 | POST | `/days` | Create or update a day (upsert, body: `{ date, note }`) |
 | PATCH | `/days/:date` | Update a day (body: `{ note }`) |
 
-`note` is the **intention or question of the day**: one short line (mantra, intention, single priority, or a question to keep in mind). Not a journal — never write a summary of the day here.
+`note` is the **intention or question of the day**: one short line (mantra, intention, single priority, or a question to keep in mind). Not a journal — never write a summary of the day here, and never write a note's content here: to put a note on a day, use `POST /notes/:id/dates/:date` (or `dates` on the note).
 
 ## Tags
 

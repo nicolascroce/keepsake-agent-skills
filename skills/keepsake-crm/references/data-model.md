@@ -85,7 +85,7 @@ Completing a recurring task auto-creates the next occurrence.
 
 ### QuickNote (Note)
 
-A durable text document — like a digital index card. Intentional capture, short, reformulated.
+A durable text document — like a digital index card. Intentional capture, short, reformulated. Can be attached to one or more calendar days (it then surfaces in that day's view) — neither a task nor the day's intention.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -95,6 +95,7 @@ A durable text document — like a digital index card. Intentional capture, shor
 | archived | boolean | no | Archived (stays searchable) |
 | contactIds | uuid[] | no | Linked contacts |
 | tagIds | uuid[] | no | Linked tags |
+| dates | string[] | no | Days the note is linked to (YYYY-MM-DD) |
 | createdAt | timestamp | auto | Creation date |
 | updatedAt | timestamp | auto | Last update |
 
@@ -107,6 +108,7 @@ A calendar day carrying the user's **intention or question of the day** — one 
 | id | uuid | auto | Unique identifier |
 | date | string | yes | Date (YYYY-MM-DD) |
 | note | text | no | Intention or question of the day (one short line) |
+| notes | Note[] | read-only | Notes linked to this day (via `dates` on notes) |
 | createdAt | timestamp | auto | Creation date |
 | updatedAt | timestamp | auto | Last update |
 
@@ -146,6 +148,7 @@ Tag     <──many-to-many──> Entry
 Tag     <──many-to-many──> Task
 Tag     <──many-to-many──> Note
 Tag     <──many-to-many──> Contact
+Note    <──many-to-many──> Day (dated note: surfaces in the Day view)
 Task    ──many-to-one───> TaskHeader (optional section)
 Comment ──many-to-one───> Note (marginalia, anchored to a passage or note-wide)
 ```
