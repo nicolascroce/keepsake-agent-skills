@@ -96,7 +96,7 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 **Scanning many contacts**: `list_contacts` with `fields: ["first_name", "last_name", "companies"]` skips long notes; filter with `company` (id or part of a name), `has_company`, or `updated_since`.
 
-**Link everything**: Use `link_entry_contact`, `link_task_contact`, `link_note_contact` to connect elements to people.
+**Link everything**: Use `link_entry_contact`, `link_task_contact`, `link_note_contact` to connect elements to people, and `link_entry_company`, `link_task_company`, `link_note_company` (or `company_ids`) to connect them to organizations. "Follow up with AFDAS on Friday" is a task linked to the AFDAS company. To see everything about an organization: `list_tasks`, `list_notes`, `list_entries` with `company_id`. To read one task: `get_task`.
 
 # Dimension: Themes (Knowledge Base)
 
@@ -162,6 +162,8 @@ Every note, entry, and task can connect to 0-N contacts AND 0-N tags. Use dedica
 | Create a company | `create_company` |
 | Link a person to a company | `create_contact` / `update_contact` with `company`, or `link_contact_company` |
 | Merge duplicate companies | `merge_companies` |
+| Link a task/note/entry to a company | `company_ids`, or `link_task_company` / `link_note_company` / `link_entry_company` |
+| Everything about a company | `list_tasks` / `list_notes` / `list_entries` with `company_id` |
 | Contacts of a company | `list_contacts` with `company` |
 | Intention of the day | `update_day` |
 | Check for changes | `get_changelog` |

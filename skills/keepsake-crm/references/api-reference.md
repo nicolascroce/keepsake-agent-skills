@@ -55,10 +55,12 @@ Authorization: Bearer ksk_YOUR_API_KEY
 | DELETE | `/entries/:id` | Delete an entry |
 | POST | `/entries/:id/contacts/:contactId` | Link a contact |
 | DELETE | `/entries/:id/contacts/:contactId` | Unlink a contact |
+| POST | `/entries/:id/companies/:companyId` | Add a company as participant |
+| DELETE | `/entries/:id/companies/:companyId` | Remove a company |
 | POST | `/entries/:id/tags/:tagId` | Link a tag |
 | DELETE | `/entries/:id/tags/:tagId` | Unlink a tag |
 
-**Create body**: `{ type, date, content?, contact_ids?, tag_ids? }`
+**Create body**: `{ type, date, content?, contact_ids?, company_ids?, tag_ids? }`
 
 **Entry types**: call, email, meeting, event, gift, letter, message, other
 
@@ -77,10 +79,12 @@ Authorization: Bearer ksk_YOUR_API_KEY
 | POST | `/tasks/:id/snooze` | Snooze a task (body: `{ until: "YYYY-MM-DD" }`) |
 | POST | `/tasks/:id/contacts/:contactId` | Link a contact |
 | DELETE | `/tasks/:id/contacts/:contactId` | Unlink a contact |
+| POST | `/tasks/:id/companies/:companyId` | Link a company |
+| DELETE | `/tasks/:id/companies/:companyId` | Unlink a company |
 | POST | `/tasks/:id/tags/:tagId` | Link a tag |
 | DELETE | `/tasks/:id/tags/:tagId` | Unlink a tag |
 
-**Create body**: `{ title, description?, date?, date_type?, priority?, recurrence?, primary_contact_id?, contact_ids?, tag_ids?, section_id? }`
+**Create body**: `{ title, description?, date?, date_type?, priority?, recurrence?, primary_contact_id?, contact_ids?, company_ids?, tag_ids?, section_id? }`
 
 **Recurrence**: daily, weekdays, weekly, biweekly, monthly, quarterly, yearly
 
@@ -99,12 +103,16 @@ Authorization: Bearer ksk_YOUR_API_KEY
 | POST | `/notes/:id/unarchive` | Unarchive |
 | POST | `/notes/:id/contacts/:contactId` | Link a contact |
 | DELETE | `/notes/:id/contacts/:contactId` | Unlink a contact |
+| POST | `/notes/:id/companies/:companyId` | Link a company |
+| DELETE | `/notes/:id/companies/:companyId` | Unlink a company |
 | POST | `/notes/:id/tags/:tagId` | Link a tag |
 | DELETE | `/notes/:id/tags/:tagId` | Unlink a tag |
 | POST | `/notes/:id/dates/:date` | Attach the note to a day (YYYY-MM-DD, idempotent) |
 | DELETE | `/notes/:id/dates/:date` | Detach the note from a day (the note survives) |
 
-**Create body**: `{ content, pinned?, contact_ids?, tag_ids?, dates? }` — `dates` is an array of `YYYY-MM-DD`.
+**Create body**: `{ content, pinned?, contact_ids?, company_ids?, tag_ids?, dates? }` — `dates` is an array of `YYYY-MM-DD`.
+
+**Companies on tasks, notes and entries**: `company_ids` works like `contact_ids` (replace semantics on PATCH, `[]` unlinks all) but is independent from it — a person goes in `contact_ids`, an organization in `company_ids`. Every task, note and entry response carries `company_ids`. Filter any of the three lists with `?company_id=`.
 
 **Update body**: `{ content?, contact_ids?, tag_ids?, dates? }` — `dates` **replaces** the full set of days (the way to move a note to another day; `[]` unlinks from every day).
 

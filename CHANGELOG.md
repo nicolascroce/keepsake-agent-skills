@@ -4,6 +4,15 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] - 2026-09-29
+
+### Added
+- **Tasks, notes and entries linked to companies.** `company_ids` on create/update
+  (separate from `contact_ids`), returned on every task, note and entry; `company_id`
+  filter on the three lists; `link_`/`unlink_` + `task`/`note`/`entry` + `_company`
+  tools (keepsake-mcp 1.12.0).
+- `get_task`: read one task with its tags, contacts, companies and linked notes.
+
 ## [1.4.0] - 2026-09-29
 
 ### Added
