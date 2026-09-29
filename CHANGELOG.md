@@ -4,6 +4,23 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] - 2026-09-29
+
+### Added
+- **Companies as records, everywhere.** A contact's company is a linked company
+  record (`companies: [{ id, name, role }]`), never free text. `company: "Name"` on
+  `create_contact` / `update_contact` finds or creates the record and links it.
+- New tools: `link_contact_company` (with role), `unlink_contact_company`,
+  `merge_companies` (keepsake-mcp 1.11.0).
+- `list_contacts`: `fields` for lighter responses, filters `company`,
+  `has_company`, `updated_since`.
+
+### Fixed
+- SKILL.md named a non-existent tool (`link_company_contact`).
+- API reference: contact and company fields now use the API's snake_case names;
+  unlink endpoint is `DELETE /companies/:id/contacts?contact_id=`; company fields
+  are `website, email, phone, address, notes` (there is no `industry`).
+
 ## [1.3.0] - 2026-09-06
 
 ### Added

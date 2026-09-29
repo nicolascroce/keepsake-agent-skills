@@ -16,15 +16,17 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/contacts` | List all contacts. Query: `?sort=firstName\|lastName\|createdAt&order=asc\|desc` |
-| GET | `/contacts/search?q=` | Search contacts (accent-insensitive) |
-| GET | `/contacts/:id` | Get a single contact |
+| GET | `/contacts` | List contacts. Query: `sort` (`first_name`, `last_name`, `created_at`, `updated_at`…), `order=asc\|desc`, `fields` (comma-separated: columns + `companies`, `last_interaction_date`), `company` (company id or part of its name), `has_company=true\|false`, `updated_since` (ISO), `include_last_interaction=true` |
+| GET | `/contacts/search?q=` | Search contacts (accent-insensitive: names, email, notes, phone, linked company names) |
+| GET | `/contacts/:id` | Get a single contact (with recent entries, tags, companies) |
 | POST | `/contacts` | Create a contact |
 | PATCH | `/contacts/:id` | Update a contact |
-| DELETE | `/contacts/:id` | Delete a contact |
+| DELETE | `/contacts/:id` | Delete a contact (`?permanent=true` for hard delete) |
 | GET | `/contacts/:id/timeline` | Get full interaction timeline |
 
-**Create body**: `{ firstName, lastName?, email?, phone?, address?, birthday?, notes?, tag_ids? }`
+**Create body**: `{ first_name, last_name?, email?, phone?, job_title?, address?, birthday? (YYYY-MM-DD), notes?, company? }`
+
+`company` is a shortcut, not a stored field: it links the contact to that company record (found by name ignoring case and accents, created if missing). It adds a link and never removes one. Contacts are returned with `companies: [{ id, name, role }]`.
 
 ## Companies
 
@@ -32,14 +34,15 @@ Authorization: Bearer ksk_YOUR_API_KEY
 |--------|----------|-------------|
 | GET | `/companies` | List all companies |
 | GET | `/companies/search?q=` | Search companies (accent-insensitive) |
-| GET | `/companies/:id` | Get company with linked contacts |
+| GET | `/companies/:id` | Get company with linked contacts (and their role) and tags |
 | POST | `/companies` | Create a company |
-| PATCH | `/companies/:id` | Update a company |
-| DELETE | `/companies/:id` | Delete a company |
-| POST | `/companies/:id/contacts` | Link a contact (body: `{ contact_id, role? }`) |
-| DELETE | `/companies/:id/contacts/:contactId` | Unlink a contact |
+| PATCH | `/companies/:id` | Update a company. Renaming onto another company's name returns 409 (use merge) |
+| DELETE | `/companies/:id` | Delete a company (`?permanent=true` for hard delete) |
+| POST | `/companies/:id/contacts` | Link a contact (body: `{ contact_id, role? }`), idempotent |
+| DELETE | `/companies/:id/contacts?contact_id=` | Unlink a contact |
+| POST | `/companies/:id/merge` | Merge this company into `{ target_id }`: contacts, entries and tags move over, empty details are filled, notes appended, then this company is deleted |
 
-**Create body**: `{ name, website?, industry?, notes?, tag_ids? }`
+**Create body**: `{ name, website?, email?, phone?, address?, notes? }`
 
 ## Entries
 

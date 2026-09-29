@@ -16,15 +16,19 @@ A person in the user's network.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | id | uuid | auto | Unique identifier |
-| firstName | string | yes | First name |
-| lastName | string | no | Last name |
+| first_name | string | yes | First name |
+| last_name | string | no | Last name |
 | email | string | no | Email address |
 | phone | string | no | Phone number |
+| job_title | string | no | Job title |
 | address | string | no | Physical address |
-| birthday | string | no | Birthday (YYYY-MM-DD) |
+| birth_day / birth_month / birth_year | integer | no | Birthday (write it with `birthday: "YYYY-MM-DD"`) |
 | notes | text | no | Free-form notes (Markdown) |
-| createdAt | timestamp | auto | Creation date |
-| updatedAt | timestamp | auto | Last update |
+| companies | array | computed | Linked company records: `[{ id, name, role }]` |
+| created_at | timestamp | auto | Creation date |
+| updated_at | timestamp | auto | Last update |
+
+A contact's company is always a **company record**, never free text. `company: "Name"` on create/update is a shortcut that links (or creates) the record.
 
 ### Company
 
@@ -35,12 +39,14 @@ An organization or business.
 | id | uuid | auto | Unique identifier |
 | name | string | yes | Company name |
 | website | string | no | Website URL |
-| industry | string | no | Industry/sector |
+| email | string | no | Email address |
+| phone | string | no | Phone number |
+| address | string | no | Address |
 | notes | text | no | Free-form notes (Markdown) |
-| createdAt | timestamp | auto | Creation date |
-| updatedAt | timestamp | auto | Last update |
+| created_at | timestamp | auto | Creation date |
+| updated_at | timestamp | auto | Last update |
 
-Contacts can be linked to companies with an optional role (e.g. "CEO", "Designer").
+Contacts can be linked to companies with an optional role (e.g. "CEO", "Designer"). A contact can belong to several companies. Duplicate companies are merged, not deleted, so nothing is lost.
 
 ### Entry
 

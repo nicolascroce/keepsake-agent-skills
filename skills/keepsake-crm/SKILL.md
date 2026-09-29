@@ -92,7 +92,9 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 **Full history**: `get_contact_timeline` gives a chronological view of all interactions with a person. Use it to prepare context before a meeting.
 
-**Companies**: `create_company` to track organizations. Link contacts with their role using `link_company_contact`.
+**Companies**: a person's company is always a company record, never free text. The quickest path: `create_contact` / `update_contact` with `company: "Name"` — Keepsake finds that company (ignoring case and accents) or creates it, then links the person. For a specific role, several companies, or to detach someone, use `link_contact_company` (with `role`) and `unlink_contact_company`. Each contact returns its companies in `companies`. If two records describe the same organization, confirm with your user which one to keep, then `merge_companies` — contacts, entries, tags, details and notes move over, nothing is lost.
+
+**Scanning many contacts**: `list_contacts` with `fields: ["first_name", "last_name", "companies"]` skips long notes; filter with `company` (id or part of a name), `has_company`, or `updated_since`.
 
 **Link everything**: Use `link_entry_contact`, `link_task_contact`, `link_note_contact` to connect elements to people.
 
@@ -158,6 +160,9 @@ Every note, entry, and task can connect to 0-N contacts AND 0-N tags. Use dedica
 | Link tag to element | `link_tag` |
 | See tag contents | `get_tag_items` |
 | Create a company | `create_company` |
+| Link a person to a company | `create_contact` / `update_contact` with `company`, or `link_contact_company` |
+| Merge duplicate companies | `merge_companies` |
+| Contacts of a company | `list_contacts` with `company` |
 | Intention of the day | `update_day` |
 | Check for changes | `get_changelog` |
 
