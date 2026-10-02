@@ -100,7 +100,7 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 # Dimension: Themes (Knowledge Base)
 
-**Notes = index cards**: Use `create_note` for ideas, references, checklists. Keep them short and intentional. `pin_note` for quick access, `archive_note` when processed — archived notes stay searchable forever.
+**Notes = index cards**: Use `create_note` for ideas, references, checklists. Keep them short and intentional. `pin_note` only for post-its — short references the user wants always at hand (gate code, room number, Wi-Fi password), never just because a note is important, `archive_note` when processed — archived notes stay searchable forever.
 
 **Notes on a day**: a note can be attached to one or more calendar days — "note for tomorrow", "what to bring Thursday", the prep for a meeting on the 18th. Pass `dates: ["YYYY-MM-DD"]` to `create_note` / `update_note`, or `link_note_date` on an existing note; link the relevant contacts too. The note then surfaces in that day's view while staying in the notes list. It is **not a task** (no action to complete) and **not the day's intention** (`update_day` is one short line — writing a note there overwrites it). To move a note to another day, `update_note` with the new `dates` array. To see a day: `get_day` returns both the intention (`note`) and the linked notes (`notes`); `list_notes` with `date` answers "what did I note for Monday?".
 

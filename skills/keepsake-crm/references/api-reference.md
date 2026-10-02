@@ -48,7 +48,7 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/entries` | List entries. Query: `?from=YYYY-MM-DD&to=YYYY-MM-DD` |
+| GET | `/entries` | List entries. Query: `?from=YYYY-MM-DD&to=YYYY-MM-DD`, `?type=`, `?contact_id=`, `?company_id=`, `?tag_id=` (entries of one page) |
 | GET | `/entries/:id` | Get a single entry |
 | POST | `/entries` | Create an entry |
 | PATCH | `/entries/:id` | Update an entry |
@@ -68,7 +68,7 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/tasks` | List all tasks |
+| GET | `/tasks` | List tasks. Query: `?status=pending\|completed`, `?date_type=`, `?date=`, `?company_id=`, `?tag_id=` (tasks of one page — `tag_id` + `status=pending` = a project's open tasks) |
 | GET | `/tasks/today` | Get today's tasks |
 | GET | `/tasks/overdue` | Get overdue tasks |
 | GET | `/tasks/:id` | Get a single task |
@@ -92,7 +92,7 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/notes` | List notes. Query: `?pinned=true&archived=false`, `?date=YYYY-MM-DD` or `?date_from=…&date_to=…` (notes linked to a day / range). Each note carries `dates` |
+| GET | `/notes` | List notes. Query: `?pinned=true&archived=false`, `?date=YYYY-MM-DD` or `?date_from=…&date_to=…` (notes linked to a day / range), `?company_id=`, `?tag_id=` (notes of one page). Each note carries `dates` |
 | GET | `/notes/:id` | Get a single note |
 | POST | `/notes` | Create a note |
 | PATCH | `/notes/:id` | Update a note |
@@ -155,7 +155,7 @@ the wrong place. Omit `quote` for a note-wide comment.
 | GET | `/tags/:id` | Get a single tag (includes `tasks_order`, where `"h:<header_id>"` entries mark section separators) |
 | GET | `/tags/:id/items` | Get items linked to a tag (`?types=tasks,notes`, `?status=pending\|completed` for tasks, `?summary=true` for lightweight items; response includes task `sections` — `header_id: null` = tasks outside any section) |
 | POST | `/tags` | Create a tag |
-| PATCH | `/tags/:id` | Update a tag |
+| PATCH | `/tags/:id` | Update a tag: `{ name?, description?, color?, icon?, is_favorite?, tasks_order? }` — `tasks_order` is the full display order of the page's tasks, with `"h:<header_id>"` entries for sections (read it with GET `/tags/:id`, edit, send the whole array back; tasks listed after a section belong to it) |
 | DELETE | `/tags/:id` | Delete a tag |
 
 **Create body**: `{ name, emoji? }`

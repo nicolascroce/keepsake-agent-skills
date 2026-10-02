@@ -4,6 +4,22 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.0] - 2026-10-02
+
+### Added
+- **Filter by page.** `tag_id` on `list_tasks`, `list_notes` and `list_entries`
+  (`GET /tasks|/notes|/entries?tag_id=`): `tag_id` + `status=pending` lists a
+  project's open tasks without loading the whole page.
+- **Sections on a page.** `update_tag` accepts `tasks_order` (the page's task
+  order, `"h:<header_id>"` for sections) — create a section with
+  `create_task_header`, then insert it where it should start.
+
+### Changed
+- `pin_note` is for post-its only (gate code, room number…), not for important
+  notes.
+- `update_tag` no longer takes `view_mode`: every page has a single view
+  (keepsake-mcp 1.13.0).
+
 ## [1.5.0] - 2026-09-29
 
 ### Added
