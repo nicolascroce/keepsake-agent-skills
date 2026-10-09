@@ -1,10 +1,10 @@
 # Keepsake Agent Skills
 
-Give your AI agent a relational memory.
+Give your AI agent a memory that lasts: ideas, tasks and the people who matter.
 
 ## What is this?
 
-[Keepsake](https://keepsake.place) is a personal CRM that helps you remember every person, every interaction, every promise. This skill teaches AI agents how to use Keepsake effectively — when to log interactions, how to organize contacts, and how to build a knowledge base.
+[Keepsake](https://keepsake.place) (keepsake.place) is the app where creators and solo entrepreneurs empty their heads: ideas, tasks and the people who matter, together and linked in one place, all the way to publishing. This skill teaches AI agents how to use Keepsake effectively — when to log interactions, how to organize contacts, and how to build a knowledge base.
 
 ## Quick Start
 

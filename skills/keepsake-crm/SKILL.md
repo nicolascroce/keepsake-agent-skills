@@ -1,10 +1,11 @@
 ---
 name: keepsake-crm
 description: >
-  Keepsake personal CRM — manage contacts, log interactions, capture notes,
-  organize tasks, and track relationships. Use when user mentions people,
-  meetings, promises, follow-ups, or personal/professional relationships.
-  Works with keepsake-mcp server or REST API directly.
+  Keepsake (keepsake.place), the app where creators and solo entrepreneurs
+  empty their heads: ideas, tasks and the people who matter, linked in one
+  place, all the way to publishing. Use when the user wants to capture an idea
+  or a note, mentions people, meetings, promises, follow-ups, things to do or
+  a project. Works with the keepsake-mcp server or the REST API directly.
 license: MIT
 metadata:
   author: Keepsake

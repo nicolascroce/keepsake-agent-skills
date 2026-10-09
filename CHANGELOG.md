@@ -4,6 +4,14 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.1] - 2026-10-09
+
+### Changed
+- **Description.** Keepsake is now described as the app where creators and solo
+  entrepreneurs empty their heads (ideas, tasks and the people who matter,
+  linked in one place, all the way to publishing) rather than as a personal CRM.
+  The skill also triggers when the user wants to capture an idea or a note.
+
 ## [1.7.0] - 2026-10-09
 
 ### Added
