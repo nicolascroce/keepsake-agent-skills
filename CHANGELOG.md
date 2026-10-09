@@ -4,6 +4,15 @@ All notable changes to the Keepsake Agent Skill will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.7.0] - 2026-10-09
+
+### Added
+- **Publication flow.** `list_note_statuses` (`GET /note-statuses`) lists the
+  stages of the user's flow (Idea → In progress → To review → Ready → Published
+  by default, customizable). `status` on `create_note` / `update_note` /
+  `list_notes` puts a note in the flow, moves it along, or lists the notes at a
+  stage ("what's waiting for review?").
+
 ## [1.6.0] - 2026-10-02
 
 ### Added

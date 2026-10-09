@@ -104,6 +104,8 @@ Keepsake is the **connective tissue**: every element can be linked to all three 
 
 **Notes on a day**: a note can be attached to one or more calendar days — "note for tomorrow", "what to bring Thursday", the prep for a meeting on the 18th. Pass `dates: ["YYYY-MM-DD"]` to `create_note` / `update_note`, or `link_note_date` on an existing note; link the relevant contacts too. The note then surfaces in that day's view while staying in the notes list. It is **not a task** (no action to complete) and **not the day's intention** (`update_day` is one short line — writing a note there overwrites it). To move a note to another day, `update_note` with the new `dates` array. To see a day: `get_day` returns both the intention (`note`) and the linked notes (`notes`); `list_notes` with `date` answers "what did I note for Monday?".
 
+**Publication flow**: a note the user may publish one day (article, post, newsletter) can move through their publication flow — by default Idea → In progress → To review → Ready → Published. Stages are the user's own (renamed, recolored, added, removed in Settings → Publishing flow), so call `list_note_statuses` before setting one, and pass a stage name, key or id. `create_note` with `status` puts a new note straight into the flow (as a permanent Note, like "Keep to publish" in the app) — only when the user says they may publish it; most notes never enter the flow. `update_note` with `status` moves a note along ("this one is ready"); `status: null` takes it out. `list_notes` with `status` answers "what's waiting for review?" (`publication` = every note in the flow not published yet, `none` = notes outside the flow). Publishing on the user's Keepsake Page sets the published stage automatically.
+
 **Tags/Pages = project boxes**: Use `create_tag` to create a thematic grouping. Use `link_tag` to attach any element (note, entry, task, contact) to a tag. Use `get_tag_items` to see everything in a project.
 
 **Tag syntax**: Use `#tag name#` or `[[page name]]` in content to auto-create and link tags.
@@ -156,6 +158,9 @@ Every note, entry, and task can connect to 0-N contacts AND 0-N tags. Use dedica
 | Notes of a day | `list_notes` with `date`, or `get_day` |
 | Pin/unpin a note | `pin_note` / `unpin_note` |
 | Archive a note | `archive_note` |
+| Stages of the publication flow | `list_note_statuses` |
+| Move a note to a stage | `update_note` with `status` |
+| Notes at a stage | `list_notes` with `status` |
 | Create a tag | `create_tag` |
 | Link tag to element | `link_tag` |
 | See tag contents | `get_tag_items` |

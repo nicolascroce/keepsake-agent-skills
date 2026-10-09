@@ -92,8 +92,9 @@ Authorization: Bearer ksk_YOUR_API_KEY
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/notes` | List notes. Query: `?pinned=true&archived=false`, `?date=YYYY-MM-DD` or `?date_from=…&date_to=…` (notes linked to a day / range), `?company_id=`, `?tag_id=` (notes of one page). Each note carries `dates` |
+| GET | `/notes` | List notes. Query: `?pinned=true&archived=false`, `?date=YYYY-MM-DD` or `?date_from=…&date_to=…` (notes linked to a day / range), `?company_id=`, `?tag_id=` (notes of one page), `?status=` (publication-flow stage: name, key or id from `/note-statuses`; `publication` = in the flow but not published, `none` = outside the flow). Each note carries `dates` and `status` |
 | GET | `/notes/:id` | Get a single note |
+| GET | `/note-statuses` | Stages of the user's publication flow, in order (`id`, `key`, `name`, `color`, `category`: unstarted / started / published) |
 | POST | `/notes` | Create a note |
 | PATCH | `/notes/:id` | Update a note |
 | DELETE | `/notes/:id` | Delete a note |
@@ -110,11 +111,11 @@ Authorization: Bearer ksk_YOUR_API_KEY
 | POST | `/notes/:id/dates/:date` | Attach the note to a day (YYYY-MM-DD, idempotent) |
 | DELETE | `/notes/:id/dates/:date` | Detach the note from a day (the note survives) |
 
-**Create body**: `{ content, pinned?, contact_ids?, company_ids?, tag_ids?, dates? }` — `dates` is an array of `YYYY-MM-DD`.
+**Create body**: `{ content, pinned?, contact_ids?, company_ids?, tag_ids?, dates?, status? }` — `dates` is an array of `YYYY-MM-DD`; `status` (a stage) creates the note directly in the publication flow, as a permanent Note.
 
 **Companies on tasks, notes and entries**: `company_ids` works like `contact_ids` (replace semantics on PATCH, `[]` unlinks all) but is independent from it — a person goes in `contact_ids`, an organization in `company_ids`. Every task, note and entry response carries `company_ids`. Filter any of the three lists with `?company_id=`.
 
-**Update body**: `{ content?, contact_ids?, tag_ids?, dates? }` — `dates` **replaces** the full set of days (the way to move a note to another day; `[]` unlinks from every day).
+**Update body**: `{ content?, contact_ids?, tag_ids?, dates?, status? }` — `dates` **replaces** the full set of days (the way to move a note to another day; `[]` unlinks from every day). `status` moves the note to a stage of the publication flow; `null` takes it out of the flow.
 
 ### Note comments (marginalia)
 

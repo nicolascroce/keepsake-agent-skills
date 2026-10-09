@@ -102,6 +102,7 @@ A durable text document — like a digital index card. Intentional capture, shor
 | contactIds | uuid[] | no | Linked contacts |
 | tagIds | uuid[] | no | Linked tags |
 | dates | string[] | no | Days the note is linked to (YYYY-MM-DD) |
+| status | object \| null | no | Stage in the publication flow (`id`, `key`, `name`, `color`, `category`), or null when the note is outside the flow. Set with a stage name, key or id from `list_note_statuses` |
 | createdAt | timestamp | auto | Creation date |
 | updatedAt | timestamp | auto | Last update |
 
